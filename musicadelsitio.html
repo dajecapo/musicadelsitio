@@ -1,0 +1,73 @@
+<!-- SECCIÓN: MÚSICA DEL SITIO -->
+<section id="musica" style="padding: 40px; background-color: #f8f8f8; font-family: 'Segoe UI', sans-serif;">
+    <h2 style="text-align:center; font-size: 28px; color: #333;">🎼 Música del sitio</h2>
+    
+    <div style="text-align:center; margin-top: 20px;">
+      <button onclick="toggleJingle()" id="btnToggleJingle" style="
+        background-color: #6a5acd;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: background-color 0.3s;">
+        🎧 Mostrar reproductor
+      </button>
+    </div>
+  
+    <div id="jingleContainer" style="display: none; margin-top: 20px; text-align: center;">
+      <audio id="jingleAudio" src="https://github.com/dajecapo/adopta-un-sabio/raw/main/adopta%20un%20sabio.mp3" preload="auto"></audio>
+      
+      <button onclick="reproducirJingle()" style="
+        background-color: #ffcc00;
+        color: #333;
+        font-weight: bold;
+        font-size: 16px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: background-color 0.3s;">
+        🎵 Escuchar jingle del sitio
+      </button>
+  
+      <p style="margin-top: 10px; font-style: italic; color: #555;">
+        Jingle: <strong>“Experiencia”</strong><br>
+        Autor e intérprete: <strong>Daniel Jesús Carrillo Polanco</strong>
+      </p>
+    </div>
+  </section>
+  
+  <script>
+  // Mostrar u ocultar el reproductor
+  function toggleJingle() {
+    const contenedor = document.getElementById('jingleContainer');
+    const boton = document.getElementById('btnToggleJingle');
+    if (contenedor.style.display === 'none') {
+      contenedor.style.display = 'block';
+      boton.textContent = '🎧 Ocultar reproductor';
+    } else {
+      contenedor.style.display = 'none';
+      boton.textContent = '🎧 Mostrar reproductor';
+    }
+  }
+  
+  // Reproducir el jingle si está pausado
+  function reproducirJingle() {
+    const audio = document.getElementById('jingleAudio');
+    if (audio && audio.paused) {
+      audio.play().catch(error => {
+        console.log("Reproducción bloqueada por el navegador. Requiere interacción.");
+      });
+    }
+  }
+  
+  // Reproducción automática al primer clic, scroll o toque
+  ['click', 'scroll', 'touchstart'].forEach(evt => {
+    document.addEventListener(evt, reproducirJingle, { once: true });
+  });
+  </script>
+  
